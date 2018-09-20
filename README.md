@@ -1,2 +1,2 @@
-# PowerUp-offseason
-Our offseason robotics competition code
+# PowerUp
+Sample Command Based Robot
