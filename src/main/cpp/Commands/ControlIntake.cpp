@@ -58,8 +58,15 @@ void ControlIntake::Execute()
 		
 		// Close Grippers
 		CommandBase::pIntake->CloseGripper();
+	} else if(pJoyDrive->getBumper(frc::XboxController::kLeftHand)){ // Make sure you cant intake and output at the same time
+		// Set intake speed
+		dInSpeed = 0.0;
+		dOutSpeed = CUBEUP_OUTPUT_SPEED;
+	} else if(pJoyDrive->getBumperReleased(frc::XboxController::kLeftHand)){
+		CommandBase::pIntake->OpenGripper();
 	}
-
+	
+	
 	double dSpeed = (dInSpeed - dOutSpeed) * GRIPPER_SPEED_ADJUSTMENT_RATIO;
 	CommandBase::pIntake->SetSpeed(dSpeed);
 
