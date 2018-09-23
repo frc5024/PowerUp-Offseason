@@ -10,5 +10,7 @@ const double XBOX_DEADZONE_RIGHT_JOY = 0.1;
 //Tele-Auto CubeUp
 const double CUBEUP_FSPEED = 20.0;
 const double CUBEUP_BSPEED = 0.00;
+const double CUBEUP_INTAKE_SLOW = 40.0;
+const double CUBEUP_INTAKE_FAST = 70.0;
 
 #endif
