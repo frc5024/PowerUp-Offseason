@@ -2,7 +2,7 @@ Driver Controller
 Button A       : Intake - Close
 Button B       : Intake - Open
 Button X       : DriveTrain - Toggle Reverse
-Button Y       :
+Button Y       : Hold: Drive forward, open grippers, intake | Release: close grippers, raise elevator, drive back
 Left Stick     : DriveTrain Forwards/Backwards/Left/Right
 Left Bumper    :
 Left Trigger   : Intake - Cube In
@@ -16,7 +16,7 @@ Back Button    :
 Operator Controller
 Button A + LB  : ClimbScale - Extend Arm by Solenoid
 Button B + RB  : ClimbScale - Retract Arm by Motor
-Button X       : 
+Button X       :
 Button Y       :
 Left Stick     :
 Left Bumper    :
