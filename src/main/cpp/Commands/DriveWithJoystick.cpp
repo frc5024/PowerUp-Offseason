@@ -59,20 +59,6 @@ void DriveWithJoystick::Execute()
 		this->isReverse = !this->isReverse;
 	}
 
-	// if (pJoyDrive->GetYButtonReleased())
-	// {
-	// 	LOG("[DWJ::Execute] Y button pressed")
-	// 	if (!pStaticTurn->IsRunning())
-	// 	{
-	// 		LOG("[DWJ::Execute] Starting 180deg turn")
-	// 		pStaticTurn->Start();
-	// 	}
-	// 	else
-	// 	{
-	// 		LOG("[DWJ::Execute] Canceling turn") ;
-	// 		pStaticTurn->Cancel();
-	// 	}
-	// }
 
 	double xSpeed    = pJoyDrive->GetY(XboxController::kLeftHand);
 	double zRotation = pJoyDrive->GetX(XboxController::kLeftHand);
@@ -91,7 +77,12 @@ void DriveWithJoystick::Execute()
 	}
 
 //	CommandBase::pDriveTrain->ArcadeDrive(xSpeed, zRotation);
-	CommandBase::pDriveTrain->ArcadeDrive((xSpeed * dSlow * dReverse), (zRotation  * dSlow));
+	// Auto Cube Up Control
+	if(pJoyDrive->GetYButton()){
+		CommandBase::pDriveTrain->ArcadeDrive(CUBEUP_FSPEED, 0);
+	} else {
+		CommandBase::pDriveTrain->ArcadeDrive((xSpeed * dSlow * dReverse), (zRotation  * dSlow));
+	}
 
 	 double leftEncoderPosition =  CommandBase::pDriveTrain->GetLeftPosition();
 

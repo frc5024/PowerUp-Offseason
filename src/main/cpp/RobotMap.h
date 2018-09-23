@@ -7,4 +7,8 @@ const int XBOX_CONTROLLER_OPERATOR_PORT = 1;
 const double XBOX_DEADZONE_LEFT_JOY = 0.1;
 const double XBOX_DEADZONE_RIGHT_JOY = 0.1;
 
+//Tele-Auto CubeUp
+const double CUBEUP_FSPEED = 20.0;
+const double CUBEUP_BSPEED = 0.00;
+
 #endif
