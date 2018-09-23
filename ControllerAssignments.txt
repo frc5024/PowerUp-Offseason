@@ -4,7 +4,7 @@ Button B       : Intake - Open
 Button X       : DriveTrain - Toggle Reverse
 Button Y       : Hold: Drive forward, open grippers, intake | Release: close grippers, raise elevator, drive back
 Left Stick     : DriveTrain Forwards/Backwards/Left/Right
-Left Bumper    :
+Left Bumper    : Hold: intale - cube out | Release: open grippers
 Left Trigger   : Intake - Cube In
 Right Stick    :
 Right Bumper   : DriveTrain - Slow speed
