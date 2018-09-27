@@ -46,23 +46,23 @@ void ControlIntake::Execute()
 	// Auto Cube Up Control
 	if(pJoyDrive->GetYButton()){
 		// Set intake speed
-		dInSpeed = CUBEUP_INTAKE_SLOW;
-		dOutSpeed = 0.0;
+		dOutSpeed = CUBEUP_INTAKE_SLOW;
+		dInSpeed = 0.0;
 		
 		// Open Grippers
 		CommandBase::pIntake->OpenGripper();
 	} else if(pJoyDrive->GetYButtonReleased()) {
 		// Set intake speed
-		dInSpeed = CUBEUP_INTAKE_FAST;
-		dOutSpeed = 0.0;
+		dOutSpeed = CUBEUP_INTAKE_FAST;
+		dInSpeed = 0.0;
 		
 		// Close Grippers
 		CommandBase::pIntake->CloseGripper();
-	} else if(pJoyDrive->getBumper(frc::XboxController::kLeftHand)){ // Make sure you cant intake and output at the same time
+	} else if(pJoyDrive->GetBumper(frc::XboxController::kLeftHand)){ // Make sure you cant intake and output at the same time
 		// Set intake speed
-		dInSpeed = 0.0;
-		dOutSpeed = CUBEUP_OUTPUT_SPEED;
-	} else if(pJoyDrive->getBumperReleased(frc::XboxController::kLeftHand)){
+		dOutSpeed = 0.0;
+		dInSpeed = CUBEUP_OUTPUT_SPEED;
+	} else if(pJoyDrive->GetBumperReleased(frc::XboxController::kLeftHand)){
 		CommandBase::pIntake->OpenGripper();
 	}
 	

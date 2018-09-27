@@ -78,11 +78,14 @@ void DriveWithJoystick::Execute()
 
 //	CommandBase::pDriveTrain->ArcadeDrive(xSpeed, zRotation);
 	// Auto Cube Up Control
-	if(pJoyDrive->GetYButton()){
-		CommandBase::pDriveTrain->ArcadeDrive(CUBEUP_FSPEED, 0);
-	} else {
-		CommandBase::pDriveTrain->ArcadeDrive((xSpeed * dSlow * dReverse), (zRotation  * dSlow));
-	}
+	// if(pJoyDrive->GetYButton()){
+	// 	CommandBase::pDriveTrain->ArcadeDrive(CUBEUP_FSPEED, 0);
+	// } else {
+	// 	CommandBase::pDriveTrain->ArcadeDrive((xSpeed * dSlow * dReverse), (zRotation  * dSlow));
+	// }
+
+	// Comment this out when using the code above
+	CommandBase::pDriveTrain->ArcadeDrive((xSpeed * dSlow * dReverse), (zRotation  * dSlow));
 
 	 double leftEncoderPosition =  CommandBase::pDriveTrain->GetLeftPosition();
 
