@@ -200,6 +200,14 @@ void DriveTrain::ArcadeDrive(double xSpeed, double zRotation)
 	return;
 }
 
+void DriveTrain::RaiderDrive(double speed, double rawCurve, double modCurve){
+	if(fabs(modCurve) >= 0.1){
+			this->pRobotDrive->CurvatureDrive(speed, modCurve, true);
+		}else{
+			this->pRobotDrive->CurvatureDrive(speed, rawCurve, false);
+		}
+}
+
 /**
  *
  */

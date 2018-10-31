@@ -31,6 +31,7 @@ public:
 	// These are the same as the DifferentialDrive class:
 	void ArcadeDrive(double xSpeed, double zRotation);
 	void CurvatureDrive(double xSpeed, double zRotation, bool isQuickTurn);
+	void RaiderDrive(double speed, double rawCurve, double modCurve);
 	void TankDrive(double leftSpeed, double rightSpeed);
 
 	AHRS*  GetAHRS(void);
