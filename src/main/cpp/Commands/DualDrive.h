@@ -20,7 +20,10 @@ public:
 private:
 	StaticTurn* pStaticTurn;
 	bool isReverse;
-	bool isManual;
+	
+	bool isManual; //!< Weather or not manual override is enabled
+	// bool isCurve; //!< Weather or not cheesy drive is enabled
+	
 };
 
 #endif
