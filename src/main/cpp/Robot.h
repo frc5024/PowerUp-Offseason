@@ -9,7 +9,7 @@
 #include "Commands/ControlElevator.h"
 #include "Commands/ControlIntake.h"
 #include "Commands/DriveWithJoystick.h"
-#include "Commands/ToggleCompressor.h
+#include "Commands/ToggleCompressor.h"
 #include "Commands/DualDrive.h"
 
 struct RobotPosition

@@ -41,7 +41,7 @@ void DualDrive::Initialize()
 {
 	LOG("[DualDrive] Initialized");
 	this->isReverse = false;
-	this->isManual = false;
+	this->driveMode = 0;
 
 	return;
 }
@@ -62,14 +62,20 @@ void DualDrive::Execute()
 	
 	// Check if the mode should be switched
 	if(pJoyDrive->GetPOV() == 90){
-		if(pJoyDrive->GetX(XboxController::kRightHand) <= -0.8){
-			this->isManual = true;
-		}else if(pJoyDrive->GetX(XboxController::kRightHand) >= 0.8){
-			this->isManual = true;
+		if(pJoyDrive->GetX(XboxController::kRightHand) <= -0.8){ // Left
+			// Tank Drive
+			this->driveMode = -1;
+		}else if(pJoyDrive->GetX(XboxController::kRightHand) >= 0.8){ // Right (default)
+			// ArcadeDrive
+			this->driveMode = 0;
+		}else if(pJoyDrive->GetY(XboxController::kRightHand) >= 0.8){ // Up
+			// Cheesy Drive
+			this->driveMode = 1;
 		}
+		
 	}
 	
-	if(isManual){
+	if(driveMode == -1){
 		// Drive with two joys
 		// Takes raw data into the motors
 		double rSpeed = pJoyDrive->GetY(XboxController::kRightHand);
@@ -85,10 +91,10 @@ void DualDrive::Execute()
 			lSpeed = 0.0;
 		}
 		// Use TankDrive to control each motor set
-		CommandBase::pDriveTrain->TankDrive(lSpeed, rSpeed);
+		CommandBase::pDriveTrain->TankDrive(lSpeed, rSpeed * -1);
 		
 		
-	}else{
+	}else if(driveMode == 0){
 
 		double xSpeed    = pJoyDrive->GetY(XboxController::kLeftHand);
 		double zRotation = pJoyDrive->GetX(XboxController::kLeftHand);
@@ -106,6 +112,27 @@ void DualDrive::Execute()
 			zRotation = 0.0;
 		}
 		CommandBase::pDriveTrain->ArcadeDrive((xSpeed * dSlow * dReverse), (zRotation  * dSlow));
+	} else if(drivemode == 1){
+		
+		// Speed
+		double xSpeed = pJoyDrive->GetY(XboxController::kLeftHand);
+		
+		// Curvature
+		double rawCurve = pJoyDrive->GetX(XboxController::kRightHand);
+		
+		// Quick Rotation
+		double modCurve = pJoyDrive->GetX(XboxController::kLeftHand);
+		
+		// Decide what turn mode to use
+		if(fabs(modCurve) >= XBOX_DEADZONE_LEFT_JOY){
+			bool quickTurn = true;
+			double zCurve = modCurve;
+		}else{
+			bool quickTurn = false;
+			double zCurve = rawCurve;
+		}
+		CommandBase::pDriveTrain->CurvatureDrive(xSpeed, zCurve, quickTurn);
+		
 	}
 	
 

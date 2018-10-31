@@ -21,7 +21,7 @@ private:
 	StaticTurn* pStaticTurn;
 	bool isReverse;
 	
-	bool isManual; //!< Weather or not manual override is enabled
+	int driveMode; //!< Weather or not manual override is enabled
 	// bool isCurve; //!< Weather or not cheesy drive is enabled
 	
 };
