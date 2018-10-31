@@ -62,25 +62,30 @@ void DualDrive::Execute()
 	
 	// Check if the mode should be switched
 	if(pJoyDrive->GetPOV() == 90){
-		if(pJoyDrive->GetX(XboxController::kRightHand) >= -0.8){
-			this->isManual = !this->isManual;
+		if(pJoyDrive->GetX(XboxController::kRightHand) <= -0.8){
+			this->isManual = true;
+		}else if(pJoyDrive->GetX(XboxController::kRightHand) >= 0.8){
+			this->isManual = true;
 		}
 	}
 	
 	if(isManual){
 		// Drive with two joys
-		double xSpeed = pJoyDrive->GetY(XboxController::kRightHand);
-		double zRotation = pJoyDrive->GetX(XboxController::kLeftHand);
+		double rSpeed = pJoyDrive->GetY(XboxController::kRightHand);
+		double lSpeed = pJoyDrive->GetX(XboxController::kLeftHand);
 		
 		if (fabs(xSpeed) <= XBOX_DEADZONE_LEFT_JOY)
 		{
-			xSpeed = 0.0;
+			rSpeed = 0.0;
 		}
 	
 		if (fabs(zRotation) <= XBOX_DEADZONE_LEFT_JOY)
 		{
-			zRotation = 0.0;
+			lSpeed = 0.0;
 		}
+		// Use TankDrive to control each motor set
+		CommandBase::pDriveTrain->TankDrive(lSpeed, rSpeed);
+		
 		
 	}else{
 
@@ -99,9 +104,9 @@ void DualDrive::Execute()
 		{
 			zRotation = 0.0;
 		}
-
+		CommandBase::pDriveTrain->ArcadeDrive((xSpeed * dSlow * dReverse), (zRotation  * dSlow));
 	}
-	CommandBase::pDriveTrain->ArcadeDrive((xSpeed * dSlow * dReverse), (zRotation  * dSlow));
+	
 
 	
 	return;
