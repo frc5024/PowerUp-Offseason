@@ -20,6 +20,7 @@ Robot::~Robot()
 	delete this->pControlElevator;
 	delete this->pControlIntake;
 	delete this->pDriveWithJoystick;
+	delete this->pDualDrive;
 	delete this->pToggleCompressor;
 
 	delete this->pAutonomousCommand;
@@ -39,6 +40,7 @@ void Robot::RobotInit()
 	this->pControlElevator = new ControlElevator();
 	this->pControlIntake = new ControlIntake();
 	this->pDriveWithJoystick = new DriveWithJoystick();
+	this->pDualDrive = new DualDrive();
 	this->pToggleCompressor = new ToggleCompressor();
 
 	// setup smartdashboard robot positions
@@ -193,10 +195,17 @@ void Robot::TeleopInit()
 	{
 		this->pControlIntake->Start();
 	}
-
-	if (this->pDriveWithJoystick != nullptr)
+	
+	// Uncomment to switch mode
+	
+	// if (this->pDriveWithJoystick != nullptr)
+	// {
+	// 	this->pDriveWithJoystick->Start();
+	// }
+	
+	if (this->pDualDrive != nullptr)
 	{
-		this->pDriveWithJoystick->Start();
+		this->pDualDrive->Start();
 	}
 
 	if (this->pToggleCompressor != nullptr)

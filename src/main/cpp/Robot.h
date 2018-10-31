@@ -9,7 +9,8 @@
 #include "Commands/ControlElevator.h"
 #include "Commands/ControlIntake.h"
 #include "Commands/DriveWithJoystick.h"
-#include "Commands/ToggleCompressor.h"
+#include "Commands/ToggleCompressor.h
+#include "Commands/DualDrive.h"
 
 struct RobotPosition
 {
@@ -54,6 +55,7 @@ public:
 	ControlElevator*	pControlElevator;
 	ControlIntake*		pControlIntake;
 	DriveWithJoystick*	pDriveWithJoystick;
+	DualDrive*          pDualDrive;
 	ToggleCompressor*   pToggleCompressor;
 
 private:
