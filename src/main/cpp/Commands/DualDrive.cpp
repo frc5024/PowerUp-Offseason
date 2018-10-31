@@ -73,7 +73,7 @@ void DualDrive::Execute()
 		// Drive with two joys
 		// Takes raw data into the motors
 		double rSpeed = pJoyDrive->GetY(XboxController::kRightHand);
-		double lSpeed = pJoyDrive->GetX(XboxController::kLeftHand);
+		double lSpeed = pJoyDrive->GetY(XboxController::kLeftHand);
 		
 		if (fabs(rSpeed) <= XBOX_DEADZONE_LEFT_JOY)
 		{
