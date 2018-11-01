@@ -39,3 +39,12 @@ ArcadeDrive is the default mode that the robot starts in. To use this mode, just
 
 ### CheesyDrive
 When in CheesyDrive mode, the robot operates like ArcadeDrive when navigating with the left joystice. But when using the X axis of the right stick, you can control the curvature of the robot's driving. This is great for making auto look cool and be efficent.
+
+## 1 Player Mode
+To switch to 1 player mode, press the dPad up button on the driver's controller. This will do the following:
+ - Disable the slow mode macro
+ - Remap elevator controls to the driver's bumpers
+ - Disable everything except climbing and compressor controls on the operator controller.
+
+## 2 Player Mode
+2 player mode is the default mode that the robot starts in. In this mode, all the controls are the same as in competitions. To switch to this mode from 1 player mode, press the left dPad button on the driver's controller.

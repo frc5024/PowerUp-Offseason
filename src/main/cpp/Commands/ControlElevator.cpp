@@ -39,6 +39,13 @@ void ControlElevator::Execute()
 	frc::XboxController* pJoyOperator = CommandBase::pOI->GetJoystickOperator();
 	frc::XboxController* pJoyDrive = CommandBase::pOI->GetJoystickDrive();
 	
+	// Check what the bumpers should be used for
+	if(pJoyDrive->GetPOV() == 0){ // UP
+		this->bumperMode = true;
+	}else if(pJoyDrive->GetPOV() == 270){ // LEFT
+		this->bumperMode = false;
+	}
+	
 	if(bumperMode){
 		if(pJoyDrive->GetBumper(XboxController::kRightHand)){
 			double rightOpTriggerAxis = 40.00;
