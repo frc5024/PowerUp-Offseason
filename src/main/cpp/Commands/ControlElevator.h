@@ -23,6 +23,7 @@ private:
 	int setElevatorPos;
 	int lastElevatorPos;
 	bool bumperMode;
+	
 };
 
 #endif
