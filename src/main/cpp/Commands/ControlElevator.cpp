@@ -26,7 +26,7 @@ ControlElevator::ControlElevator()
 void ControlElevator::Initialize()
 {
 	LOG("[ControlElevator] Initalized");
-
+	this->bumperMode = false;
 	return;
 }
 
@@ -36,9 +36,18 @@ void ControlElevator::Initialize()
 void ControlElevator::Execute()
 {
 	frc::XboxController* pJoyOperator = CommandBase::pOI->GetJoystickOperator();
-
-	double rightOpTriggerAxis = pJoyOperator->GetTriggerAxis(frc::XboxController::kRightHand);
-	double leftOpTriggerAxis  = pJoyOperator->GetTriggerAxis(frc::XboxController::kLeftHand);
+	frc::XboxController* pJoyDrive = CommandBase::pOI->GetJoystickDrive();
+	
+	if(bumperMode){
+		if(pJoyDrive->GetBumper(XboxController::kRightHand)){
+			double rightOpTriggerAxis = 40.00;
+		}else if(pJoyDrive->GetBumper(XboxController::kLeftHand)){
+			double leftOpTriggerAxis = 40.00;
+		}
+	}else{
+		double rightOpTriggerAxis = pJoyOperator->GetTriggerAxis(frc::XboxController::kRightHand);
+		double leftOpTriggerAxis  = pJoyOperator->GetTriggerAxis(frc::XboxController::kLeftHand);
+	}
 
 	double dMotorSpeed = rightOpTriggerAxis - leftOpTriggerAxis;
 

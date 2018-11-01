@@ -29,7 +29,9 @@ DualDrive::DualDrive()
 DualDrive::~DualDrive()
 {
 	LOG("[DualDrive] Destroyed");
-
+	delete this->isReverse;
+	delete this->driveMode;
+	delete this->slowLock;
 
 	return;
 }
@@ -42,6 +44,7 @@ void DualDrive::Initialize()
 	LOG("[DualDrive] Initialized");
 	this->isReverse = false;
 	this->driveMode = 0;
+	this->slowLock = false;
 
 	return;
 }
@@ -53,12 +56,21 @@ void DualDrive::Execute()
 {
 	// Create "macro" to controller
 	frc::XboxController* pJoyDrive = CommandBase::pOI->GetJoystickDrive();
-
-	// Reverse mode
-	if (pJoyDrive->GetXButtonReleased())
-	{
-		this->isReverse = !this->isReverse;
+	
+	// Check what the bumpers should be used for
+	if(pJoyDrive->GetPOV() == 0){ // UP
+		this->slowLock = true;
+	}else if(pJoyDrive->GetPOV() == 270){ // LEFT
+		this->slowLock = false;
 	}
+	
+	// Reverse mode
+	
+		if (pJoyDrive->GetXButtonReleased())
+		{
+			this->isReverse = !this->isReverse;
+		}
+	
 	
 	// Check if the mode should be switched
 	if(pJoyDrive->GetPOV() == 90){
@@ -99,7 +111,10 @@ void DualDrive::Execute()
 		double xSpeed    = pJoyDrive->GetY(XboxController::kLeftHand);
 		double zRotation = pJoyDrive->GetX(XboxController::kLeftHand);
 	
+		if(!slowLock){
 		double dSlow = (pJoyDrive->GetBumper(XboxController::kRightHand)) ? 0.5 : 1;
+		}
+		
 		double dReverse = (this->isReverse) ? -1 : 1;
 	
 		if (fabs(xSpeed) <= XBOX_DEADZONE_LEFT_JOY)

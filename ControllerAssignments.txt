@@ -9,7 +9,7 @@ Left Trigger   : Intake - Cube In
 Right Stick    :
 Right Bumper   : DriveTrain - Slow speed
 Right Trigger  : Intake - Cube Out
-Directional Pad:
+Directional Pad: RIGHT - DtiveTrain Selection;
 Start Button   :
 Back Button    :
 

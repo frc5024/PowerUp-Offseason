@@ -22,6 +22,7 @@ private:
 	int iCounter = 0;
 	int setElevatorPos;
 	int lastElevatorPos;
+	bool bumperMode;
 };
 
 #endif
