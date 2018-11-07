@@ -46,15 +46,17 @@ void ControlElevator::Execute()
 		this->bumperMode = false;
 	}
 	
+	double rightOpTriggerAxis;
+	double leftOpTriggerAxis;
 	if(bumperMode){
 		if(pJoyDrive->GetBumper(XboxController::kRightHand)){
-			double rightOpTriggerAxis = 40.00;
+			rightOpTriggerAxis = 40.00;
 		}else if(pJoyDrive->GetBumper(XboxController::kLeftHand)){
-			double leftOpTriggerAxis = 40.00;
+			leftOpTriggerAxis = 40.00;
 		}
 	}else{
-		double rightOpTriggerAxis = pJoyOperator->GetTriggerAxis(frc::XboxController::kRightHand);
-		double leftOpTriggerAxis  = pJoyOperator->GetTriggerAxis(frc::XboxController::kLeftHand);
+		rightOpTriggerAxis = pJoyOperator->GetTriggerAxis(frc::XboxController::kRightHand);
+		leftOpTriggerAxis  = pJoyOperator->GetTriggerAxis(frc::XboxController::kLeftHand);
 	}
 
 	double dMotorSpeed = rightOpTriggerAxis - leftOpTriggerAxis;

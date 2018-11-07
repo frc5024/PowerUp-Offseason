@@ -18,7 +18,6 @@ public:
 	void Interrupted() override;
 
 private:
-	StaticTurn* pStaticTurn;
 	bool isReverse;
 	bool slowLock;
 	

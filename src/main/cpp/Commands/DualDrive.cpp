@@ -29,9 +29,6 @@ DualDrive::DualDrive()
 DualDrive::~DualDrive()
 {
 	LOG("[DualDrive] Destroyed");
-	delete this->isReverse;
-	delete this->driveMode;
-	delete this->slowLock;
 
 	return;
 }
@@ -111,9 +108,10 @@ void DualDrive::Execute()
 
 		double xSpeed    = pJoyDrive->GetY(XboxController::kLeftHand);
 		double zRotation = pJoyDrive->GetX(XboxController::kLeftHand);
-	
+
+		double dSlow = 1;
 		if(!slowLock){
-		double dSlow = (pJoyDrive->GetBumper(XboxController::kRightHand)) ? 0.5 : 1;
+		dSlow = (pJoyDrive->GetBumper(XboxController::kRightHand)) ? 0.5 : 1;
 		}
 		
 		double dReverse = (this->isReverse) ? -1 : 1;
@@ -128,7 +126,7 @@ void DualDrive::Execute()
 			zRotation = 0.0;
 		}
 		CommandBase::pDriveTrain->ArcadeDrive((xSpeed * dSlow * dReverse), (zRotation  * dSlow));
-	} else if(drivemode == 1){
+	} else if(driveMode == 1){
 		
 		// Speed
 		double xSpeed = pJoyDrive->GetY(XboxController::kLeftHand);
@@ -140,14 +138,16 @@ void DualDrive::Execute()
 		double modCurve = pJoyDrive->GetX(XboxController::kLeftHand);
 		
 		// Decide what turn mode to use
-		if(fabs(modCurve) >= XBOX_DEADZONE_LEFT_JOY){
-			bool quickTurn = true;
-			double zCurve = modCurve;
-		}else{
-			bool quickTurn = false;
-			double zCurve = rawCurve;
-		}
-		CommandBase::pDriveTrain->CurvatureDrive(xSpeed, zCurve, quickTurn);
+		double zCurve = modCurve;
+		bool quickTurn = pJoyDrive->GetBumper(XboxController::kRightHand);
+		// if(fabs(modCurve) >= XBOX_DEADZONE_LEFT_JOY){
+		// 	quickTurn = true;
+		// 	zCurve = modCurve;
+		// }else{
+		// 	quickTurn = false;
+		// 	zCurve = rawCurve;
+		// }
+		CommandBase::pDriveTrain->CurvatureDrive(zCurve, xSpeed, quickTurn);
 		
 	}
 	
